@@ -1,12 +1,20 @@
 class Solution:
-    def longestCommonPrefix(self, strs):
-        prefix = strs[0]
+    def mergeTwoLists(self, list1, list2):
+        dummy = ListNode(0)
+        tail = dummy
 
-        for i in range(1, len(strs)):
-            while not strs[i].startswith(prefix):
-                prefix = prefix[:-1]
+        while list1 and list2:
+            if list1.val <= list2.val:
+                tail.next = list1
+                list1 = list1.next
+            else:
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
 
-                if prefix == "":
-                    return ""
+        if list1:
+            tail.next = list1
+        else:
+            tail.next = list2
 
-        return prefix
+        return dummy.next
